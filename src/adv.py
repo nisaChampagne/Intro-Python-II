@@ -1,4 +1,5 @@
 from room import Room
+from player import Player
 
 # Declare all the rooms
 
@@ -38,13 +39,32 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-
+new_player = Player("PythonPleb", room["outside"])
 # Write a loop that:
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
 #
+game_status = True
+while game_status:
+    cmd = input('\nWhich direction boss? ==>')
+    try:
+    ### lets you test code for errors
+        if cmd == "q":
+            print(f'Thats fine, Go home {new_player.name}!')
+            game_status = False
+        if cmd == 'n' or cmd == 'e' or cmd == 's' or cmd == 'w':
+            direction = f'{cmd}_to'
+            if new_player.current_room.__dict__[direction] == None:
+                print('\nDead end, Choose another direction.\n')
+            else:
+                new_player.current_room = new_player.current_room.__dict__[direction]
+                print(new_player)
+    except ValueError:
+    ###handles the error
+        print('Invalid command.\n')
+
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
 #
