@@ -8,6 +8,14 @@ class Room:
         self.e_to = None
         self.s_to = None
         self.w_to = None
+        self.items = []
 
     def __str__(self):
         return f'Room: {self.name}\nDescription: {self.description}'
+
+    def item_grab(self, item_name):
+        for item in self.inventory:
+            if item_name == item_name:
+                return item
+            else:
+                return None
