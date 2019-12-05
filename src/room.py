@@ -11,11 +11,8 @@ class Room:
         self.items = []
 
     def __str__(self):
-        return f'Room: {self.name}\nDescription: {self.description}'
+        read = f'Room: {self.name}\nDescription: {self.description}'
 
-    def item_grab(self, item_name):
-        for item in self.inventory:
-            if item_name == item_name:
-                return item
-            else:
-                return None
+        for i in self.items:
+            read += f"\nAvailable Items: {i}. {i.description}"
+        return read
