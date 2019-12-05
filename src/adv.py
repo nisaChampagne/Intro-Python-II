@@ -6,7 +6,7 @@ from item import Item
 
 room = {
     'outside':  Room("Outside Cave Entrance",
-                    "North of you, you see the cave mount beckons"),
+                     "North of you, you see the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south.Dusty passages run north
 and east."""),
@@ -34,17 +34,16 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
-#items
+# items
 gameboy = Item("gameboy", "This is a gameboy, probably needs batteries")
 batteries = Item("batteries", "Oh boy, some batteries!")
 money = Item("money", "Oh boy $20!")
 chair = Item("chair", "This is a chair...")
-blanket =  Item("blanket", "Oh look at that, its a blanket!")
+blanket = Item("blanket", "Oh look at that, its a blanket!")
 pillow = Item("pillow", "This is a pillow.")
 
 
-#appending items to rooms
-room["outside"].items = [pillow]
+# appending items to rooms
 room["foyer"].items = [gameboy]
 room["overlook"].items = [batteries]
 room["narrow"].items = [chair]
@@ -59,7 +58,7 @@ room["outside"].items = [blanket]
 player_name = input("Welcome pleb. What should I call you?: ")
 new_player = Player(player_name, room["outside"])
 
-#getitem()
+# getitem()
 def getitem():
     item_choice = input("What do you want to do? Ex: get sword: ").split()
     for i in new_player.current_room.items:
@@ -81,7 +80,7 @@ game_status = True
 while game_status:
     cmd = input('\nLets explore... ==>')
     try:
-    ### lets you test code for errors
+        # lets you test code for errors
         if cmd == "q":
             print(f'Thats fine, Go home {new_player.name}!')
             game_status = False
@@ -90,13 +89,17 @@ while game_status:
             if new_player.current_room.__dict__[direction] == None:
                 print("Cannot move in that direction.")
             else:
-                new_player.current_room = new_player.current_room.__dict__[direction]
+                new_player.current_room = new_player.current_room.__dict__[
+                    direction]
                 print(new_player.current_room)
                 if len(new_player.current_room.items) > 0:
                     getitem()
                     print(new_player)
+                    if len(new_player.items) == 5:
+                        print(f"{new_player.name}, you found all the things!")
+                        break
     except ValueError:
-    ###handles the error
+        # handles the error
         print('Invalid command.\n')
 
 # If the user enters a cardinal direction, attempt to move to the room there.
